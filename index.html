@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brighten Your World — Integrated Marketing System for BEMER IBDs</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage:#1D5249;--sage-mid:#2A6B5F;--sage-lt:#EBF4F1;
+    --gold:#C9973C;--gold-lt:#F5ECD8;--cream:#FAF7F2;
+    --charcoal:#232323;--muted:#3E3E3C;--white:#FFFFFF;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--charcoal);overflow-x:hidden;}
+  .hero{min-height:100vh;background:var(--charcoal);position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(29,82,73,.95) 0%,rgba(20,50,40,.98) 55%,rgba(10,10,10,1) 100%);}
+  .hero-texture{position:absolute;inset:0;background-image:radial-gradient(circle at 70% 30%,rgba(201,151,60,.1) 0%,transparent 50%),radial-gradient(circle at 20% 80%,rgba(29,82,73,.3) 0%,transparent 40%);}
+  .hero-content{position:relative;z-index:2;padding:0 80px 100px;max-width:1000px;}
+  .hero-brand{font-size:13px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:40px;padding-top:80px;}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7vw,96px);font-weight:300;line-height:1.0;color:var(--white);margin-bottom:32px;}
+  .hero h1 em{font-style:italic;color:var(--gold);}
+  .hero-deck{font-size:clamp(18px,2vw,22px);font-weight:300;line-height:1.75;color:rgba(255,255,255,.9);max-width:680px;margin-bottom:56px;}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--sage);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:18px 44px;border:2px solid var(--sage);border-radius:60px;cursor:pointer;text-decoration:none;box-shadow:0 0 0 4px rgba(29,82,73,.15);transition:background .2s,color .2s,box-shadow .2s,transform .15s;}
+  .btn:hover{background:transparent;color:var(--sage);box-shadow:0 0 0 5px rgba(29,82,73,.25);transform:translateY(-2px);}
+  .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.7);color:var(--white);box-shadow:0 0 0 4px rgba(255,255,255,.1);}
+  .btn-outline:hover{background:rgba(255,255,255,.1);border-color:var(--white);box-shadow:0 0 0 5px rgba(255,255,255,.2);}
+  .btn-white{background:var(--white);border:2px solid var(--white);color:var(--sage);box-shadow:0 0 0 4px rgba(255,255,255,.2);}
+  .btn-white:hover{background:transparent;color:var(--white);box-shadow:0 0 0 5px rgba(255,255,255,.3);}
+  .btn-dark{background:var(--charcoal);border-color:var(--charcoal);box-shadow:0 0 0 4px rgba(35,35,35,.12);}
+  .btn-dark:hover{background:transparent;color:var(--charcoal);}
+  .section{padding:100px 80px;}
+  .section-inner{max-width:1160px;margin:0 auto;}
+  .label{font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .label::before{content:'';display:block;width:28px;height:1px;background:var(--gold);}
+  h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;line-height:1.15;margin-bottom:20px;}
+  h2 em{font-style:italic;}
+  .lead{font-size:19px;font-weight:300;line-height:1.8;color:var(--muted);max-width:700px;margin-bottom:60px;}
+  .results-strip{background:var(--gold-lt);padding:72px 80px;}
+  .results-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;}
+  .result-card{text-align:center;}
+  .result-word{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:400;color:var(--sage);display:block;margin-bottom:10px;}
+  .result-card p{font-size:15px;color:var(--muted);font-weight:300;line-height:1.6;}
+  .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid #cdc7be;}
+  .tier{padding:56px 44px;display:flex;flex-direction:column;border-right:1px solid #cdc7be;}
+  .tier:last-child{border-right:none;}
+  .tier-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:6px 16px;border-radius:40px;margin-bottom:28px;align-self:flex-start;}
+  .tier-price{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;line-height:1;margin-bottom:4px;}
+  .tier-per{font-size:15px;font-weight:300;color:var(--muted);margin-bottom:8px;}
+  .tier-setup{font-size:14px;font-weight:300;color:var(--muted);margin-bottom:32px;min-height:20px;}
+  .tier-setup strong{font-weight:500;color:var(--charcoal);}
+  .tier-divider{height:1px;background:#e0d8cc;margin-bottom:28px;}
+  .tier h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;margin-bottom:8px;}
+  .tier-tagline{font-size:15px;font-weight:300;line-height:1.6;color:var(--muted);margin-bottom:28px;}
+  .tier-list{list-style:none;flex:1;margin-bottom:36px;}
+  .tier-list li{font-size:14px;font-weight:300;color:var(--muted);padding:9px 0;border-bottom:1px solid #ede7dc;display:flex;gap:12px;align-items:flex-start;line-height:1.5;}
+  .tier-list li::before{content:'✓';color:var(--sage);font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px;}
+  .tier-list li.sh{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);border-bottom:2px solid rgba(29,82,73,.15);margin-top:16px;padding-top:16px;}
+  .tier-list li.sh::before{display:none;}
+  .tier-bronze{background:var(--white);}
+  .tier-bronze .tier-badge{background:#e8e2d9;color:var(--muted);}
+  .tier-bronze .tier-price{color:var(--charcoal);}
+  .tier-bronze h3{color:var(--charcoal);}
+  .tier-silver{background:var(--white);}
+  .tier-silver .tier-badge{background:var(--sage);color:var(--white);}
+  .tier-silver .tier-price{color:var(--sage);}
+  .tier-silver h3{color:var(--sage);}
+  .tier-gold{background:var(--sage);}
+  .tier-gold .tier-badge{background:var(--gold);color:var(--white);}
+  .tier-gold .tier-price,.tier-gold h3{color:var(--white);}
+  .tier-gold .tier-per,.tier-gold .tier-setup,.tier-gold .tier-tagline{color:rgba(255,255,255,.75);}
+  .tier-gold .tier-setup strong{color:var(--white);}
+  .tier-gold .tier-divider{background:rgba(255,255,255,.15);}
+  .tier-gold .tier-list li{color:rgba(255,255,255,.88);border-bottom-color:rgba(255,255,255,.1);}
+  .tier-gold .tier-list li::before{color:var(--gold);}
+  .tier-gold .tier-list li.sh{color:var(--gold);border-bottom-color:rgba(201,151,60,.3);}
+  .addon{background:#E2F0EB;}
+  .addon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .addon-card{background:var(--white);padding:40px 32px;border-top:3px solid var(--gold);}
+  .addon-card h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--sage);margin-bottom:10px;}
+  .addon-card p{font-size:15px;font-weight:300;line-height:1.7;color:var(--muted);}
+  .support-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  .support-col h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--sage);margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid rgba(29,82,73,.15);}
+  .support-list{list-style:none;}
+  .support-list li{padding:14px 0;border-bottom:1px solid rgba(29,82,73,.08);font-size:16px;font-weight:300;color:var(--muted);display:flex;gap:14px;align-items:flex-start;line-height:1.5;}
+  .support-list li::before{content:'';display:block;flex-shrink:0;width:6px;height:6px;background:var(--gold);border-radius:50%;margin-top:7px;}
+  .included-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e0d8cc;border:1px solid #e0d8cc;}
+  .inc-card{background:var(--white);padding:44px 36px;position:relative;overflow:hidden;transition:background .2s;}
+  .inc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:transparent;transition:background .2s;}
+  .inc-card:hover{background:var(--sage-lt);}
+  .inc-card:hover::before{background:var(--gold);}
+  .inc-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:rgba(29,82,73,.15);line-height:1;margin-bottom:16px;}
+  .inc-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--sage);margin-bottom:14px;}
+  .inc-card p{font-size:16px;font-weight:300;line-height:1.75;color:var(--muted);}
+  .journey-steps{display:flex;flex-direction:column;gap:0;border:1px solid #cdc7be;}
+  .journey-step{display:grid;grid-template-columns:88px 1fr;border-bottom:1px solid #cdc7be;}
+  .journey-step:last-child{border-bottom:none;}
+  .j-num{background:var(--sage);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--white);}
+  .j-content{background:var(--white);padding:36px 44px;}
+  .j-content h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--sage);margin-bottom:10px;}
+  .j-content p{font-size:16px;font-weight:300;line-height:1.75;color:var(--muted);}
+  .j-note{display:inline-block;margin-top:10px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);}
+  footer{background:var(--charcoal);padding:48px 80px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:rgba(255,255,255,.7);}
+  .footer-brand span{color:var(--gold);}
+  footer p{font-size:15px;color:rgba(255,255,255,.55);font-weight:300;}
+  .fade{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+  .fade.in{opacity:1;transform:none;}
+  .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+  @media(max-width:1000px){
+    .hero-content{padding:60px 40px 80px;}
+    .section{padding:72px 40px;}
+    .results-strip,.addon{padding:60px 40px;}
+    .tier-grid,.addon-grid,.support-grid,.included-grid{grid-template-columns:1fr;}
+    .tier{border-right:none;border-bottom:1px solid #cdc7be;}
+    .results-inner{grid-template-columns:1fr 1fr;}
+    footer{flex-direction:column;text-align:center;padding:40px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-content">
+    <div class="hero-brand">Brighten Your World — BEMER Integrated Marketing System</div>
+    <h1>Three levels.<br>One system.<br><em>Start where you are.</em></h1>
+    <p class="hero-deck">Some begin free to explore the basics, but those who start with Gold start with momentum. If you have a practice, Gold is built for you. At the cost of one session, you skip the slow build — your AI is answering questions around the clock, your communication system is running, and every patient stays connected.</p>
+    <div class="hero-ctas">
+      <a href="https://brightenyourworld.club/marketing" class="btn">Get Started</a>
+      <a href="#tiers" class="btn btn-outline">See All Three Levels</a>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div style="background:var(--sage);padding:72px 80px;">
+  <div style="max-width:860px;margin:0 auto;text-align:center;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,34px);font-weight:300;line-height:1.6;color:var(--white);">You are becoming a BEMER distributor. Now let us support you to generate real income from it. The Regenerative Practice Accelerator pairs your device with everything you need — patient education, automated follow-up, communication systems already built — so your IBD income grows naturally from the <em>exceptional care you are already delivering.</em></p>
+  </div>
+</div>
+
+<!-- WHY IT WORKS -->
+<div style="background:var(--cream);padding:80px 80px;border-bottom:1px solid #ddd7cc;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+    <div>
+      <div style="font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;">Why This Works</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,44px);font-weight:300;line-height:1.2;color:var(--sage);">Grow your practice <em>and</em> your income — starting from day one.</p>
+    </div>
+    <div>
+      <p style="font-size:19px;font-weight:300;line-height:1.8;color:var(--muted);margin-bottom:24px;">As a licensed practitioner integrating microcirculation optimization, you deepen your clinical expertise in real time — supported by weekly research calls, peer-reviewed education, and a practitioner community — while your IBD income grows alongside your clinical outcomes from the very beginning.</p>
+      <p style="font-size:19px;font-weight:300;line-height:1.8;color:var(--muted);">The infrastructure is already built. The research is already compiled. The patient education is already written. You step in — and the system supports both your patients and your practice.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU GAIN -->
+<section class="section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="label fade">What Becomes Possible</div>
+    <h2 class="fade d1" style="color:var(--sage);">Your clinical expertise.<br><em>Our system infrastructure.</em></h2>
+    <p class="lead fade d2">Microcirculation optimization fits directly into what you already do — and the Brighten Your World system means you step into a fully built clinical education and communication infrastructure from day one. No starting from scratch. No building alone.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+      <div class="fade d1" style="background:var(--sage);padding:52px 40px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.05);"></div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--white);margin-bottom:20px;line-height:1.15;">Grow Your Income as You Deepen Your Clinical Knowledge</h3>
+        <p style="font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.92);">Your IBD income grows alongside your clinical practice from the very start — supported by weekly research calls, peer-reviewed microcirculation education, and a practitioner community that deepens your expertise in real time.</p>
+      </div>
+      <div class="fade d2" style="background:#2B6D5B;padding:52px 40px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.05);"></div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--white);margin-bottom:20px;line-height:1.15;">Hundreds of Hours of Clinical Work Already Done for You</h3>
+        <p style="font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.92);">Patient education content, peer-reviewed research compilations, clinical communication sequences, onboarding resources — all built by experienced practitioners so you implement immediately with clinical confidence and credibility.</p>
+      </div>
+      <div class="fade d3" style="background:#0A2922;padding:52px 40px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04);"></div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--white);margin-bottom:20px;line-height:1.15;">Your Appointment Time Stays Clinical</h3>
+        <p style="font-size:16px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.92);">Patient assessment, treatment planning, therapeutic sessions — that is where your expertise belongs. The system handles patient education, automated follow-up, and ongoing communication between appointments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM PLAYER -->
+<section class="section" style="background:var(--sage-lt);padding-bottom:0;">
+  <div class="section-inner">
+    <div class="label fade" style="color:var(--sage);">Microcirculation Optimization in Your Clinical Practice</div>
+    <h2 class="fade d1" style="color:var(--sage);">Microcirculation optimization<br>is a <em>clinical team player.</em></h2>
+    <p class="lead fade d2" style="color:var(--muted);">Calming the neurology and activating the mitochondria optimizes your patients' physiological response to every therapeutic modality you are already using. Better microvascular perfusion means better oxygen delivery, better metabolic clearance, better nervous system regulation — and stronger outcomes from the clinical work you are already doing. Satisfied patients refer others. That is where your IBD practice grows naturally, from clinical outcomes that happen in your treatment room.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;" class="fade d3">
+    <div style="background:#1D5249;padding:56px 32px;display:flex;flex-direction:column;gap:18px;border-right:1px solid rgba(255,255,255,.08);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);">Integrate</div>
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--white);line-height:1.2;">Add to Your Clinical Practice</h4>
+      <p style="font-size:15px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.88);">Microcirculation optimization integrates alongside your existing therapeutic modalities — enhancing, not replacing</p>
+    </div>
+    <div style="background:#174840;padding:56px 32px;display:flex;flex-direction:column;gap:18px;border-right:1px solid rgba(255,255,255,.08);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);">Physiology</div>
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--white);line-height:1.2;">Biology First</h4>
+      <p style="font-size:15px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.88);">Improved vasomotion, mitochondrial activation, and nervous system regulation optimize every subsequent intervention</p>
+    </div>
+    <div style="background:#113D34;padding:56px 32px;display:flex;flex-direction:column;gap:18px;border-right:1px solid rgba(255,255,255,.08);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);">Outcomes</div>
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--white);line-height:1.2;">Stronger Clinical Results</h4>
+      <p style="font-size:15px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.88);">Consistent usage — supported by the system — produces the physiological outcomes the research supports</p>
+    </div>
+    <div style="background:#0D6B55;padding:56px 32px;display:flex;flex-direction:column;gap:18px;border-right:1px solid rgba(255,255,255,.08);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);">Referrals</div>
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--white);line-height:1.2;">Patients Tell Others</h4>
+      <p style="font-size:15px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.92);">Measurable physiological change creates confident patients — and confident patients generate natural referrals</p>
+    </div>
+    <div style="background:#0A2922;padding:56px 32px;display:flex;flex-direction:column;gap:18px;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);">Income</div>
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--white);line-height:1.2;">Practice &amp; IBD Grow Together</h4>
+      <p style="font-size:15px;font-weight:300;line-height:1.75;color:rgba(255,255,255,.88);">Your distribution income grows from your clinical outcomes — not from a separate sales effort</p>
+    </div>
+  </div>
+</section>
+
+<!-- SAFE EASY FAST LASTING -->
+<div class="results-strip">
+  <div class="results-inner">
+    <div class="result-card fade"><span class="result-word">Safe</span><p>No adverse effects, no contraindications with existing treatment or medications — supports every clinical modality</p></div>
+    <div class="result-card fade d1"><span class="result-word">Easy</span><p>The system handles patient education and follow-up — your role is to introduce, demonstrate, and observe outcomes</p></div>
+    <div class="result-card fade d2"><span class="result-word">Fast</span><p>Physiological response is measurable. Patients notice change quickly — building confidence and consistent usage</p></div>
+    <div class="result-card fade d3"><span class="result-word">Lasting</span><p>Clinical outcomes deepen with consistent use — the system keeps patients engaged and supported between sessions</p></div>
+  </div>
+</div>
+
+<!-- THREE TIERS -->
+<section class="section" id="tiers" style="background:var(--cream);">
+
+<!-- WHAT'S INCLUDED -->
+<section class="section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="label fade">What's Included</div>
+    <h2 class="fade d1" style="color:var(--sage);">Hundreds of hours of clinical work,<br><em>ready for you to step into.</em></h2>
+    <p class="lead fade d2">The research has been compiled. The patient education has been written. The communication sequences have been developed and tested. Your role is to integrate microcirculation optimization into your clinical practice — and the system handles everything that supports that integration.</p>
+    <div class="included-grid">
+      <div class="inc-card fade d1">
+        <div class="inc-num">01</div>
+        <h3>Your Personalized Clinical Hub</h3>
+        <p>A branded landing page in your name — one link that gives patients, prospects, and colleagues everything they need: microcirculation education, session consent, registration, and entry into your clinical communication system.</p>
+      </div>
+      <div class="inc-card fade d2">
+        <div class="inc-num">02</div>
+        <h3>Structured Patient Education System</h3>
+        <p>A comprehensive online education library covering microcirculation physiology, vasomotion mechanisms, peer-reviewed research findings, and therapeutic rationale — written to the level your patients need to understand what is happening in their body and why consistent usage matters.</p>
+      </div>
+      <div class="inc-card fade d3">
+        <div class="inc-num">03</div>
+        <h3>Automated Clinical Communication Sequences</h3>
+        <p>30-day patient inquiry sequences and 8-week usage sequences for new device owners and new IBDs — sent from you, personalized to your name and practice. An ongoing Monthly Wellness Newsletter keeps your entire patient community connected and engaged.</p>
+      </div>
+      <div class="inc-card fade d4">
+        <div class="inc-num">04</div>
+        <h3>Integrated Rental Program</h3>
+        <p>Access to the Rental Education Site, which educates your rental patients throughout their rental period — so they arrive at a purchase decision already informed. Includes a comprehensive 2-step rental agreement system with automated rental patient follow-up built in.</p>
+      </div>
+      <div class="inc-card fade d5">
+        <div class="inc-num">05</div>
+        <h3>Relationship Continuity System</h3>
+        <p>Stay meaningfully connected with patients between sessions. View who is engaged with your education content, communicate directly by email or text, keep clinical notes, and schedule follow-up — so no one falls through the cracks between appointments and every relationship stays active and supported.</p>
+      </div>
+      <div class="inc-card fade d6">
+        <div class="inc-num">06</div>
+        <h3>Bonus Clinical Resources</h3>
+        <p>Processes and guidelines for integrating microcirculation optimization inside your practice. Rental materials and patient support resources. Peer-reviewed BEMER research compilations across 12 body systems. Plus a one-on-one business consultation with LoriGrace Kochevar, MS, LPC.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT JOURNEY -->
+<section class="section journey" style="background:var(--cream);">
+  <div class="section-inner">
+    <div class="label fade" style="color:var(--sage);">The Patient Journey in Your Practice</div>
+    <h2 class="fade d1" style="color:var(--sage);">From waiting room to<br><em>device owner</em> — automated.</h2>
+    <p class="lead fade d2" style="color:var(--muted);">Here is what happens when a patient enters your practice with the system running. You do not manage this. It runs.</p>
+    <div class="journey-steps fade d3">
+      <div class="journey-step">
+        <div class="j-num">1</div>
+        <div class="j-content">
+          <h4>Waiting Room</h4>
+          <p>Your lobby looping video introduces microcirculation optimization. Wall signage and business cards display QR codes. Curiosity is created before you enter the room.</p>
+          <span class="j-note">Print materials add-on available</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="j-num">2</div>
+        <div class="j-content">
+          <h4>First Session</h4>
+          <p>The patient scans the QR code to sign their consent form — which automatically enrolls them in the education sequence and begins their journey. Your introduction stays short and evokes curiosity. You demonstrate. The system educates.</p>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="j-num">3</div>
+        <div class="j-content">
+          <h4>Education Phase</h4>
+          <p>The patient enters the Discover BEMER online library and receives a structured sequence of educational emails — matched to their interests and concerns — sent from you. Automated follow-up texts check in on their experience and physiological response.</p>
+          <span class="j-note">All communications sent from you</span>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="j-num">4</div>
+        <div class="j-content">
+          <h4>Addressing Concerns</h4>
+          <p>Different patients need different things — some want the research, some need to hear others' clinical outcomes, some need time. The automated system reaches each type. Weekly expert calls and a medical panel provide additional depth and confidence for those who need it.</p>
+        </div>
+      </div>
+      <div class="journey-step">
+        <div class="j-num">5</div>
+        <div class="j-content">
+          <h4>Decision &amp; Ownership</h4>
+          <p>Continuous, personalized follow-up gives patients the confidence to move forward and the commitment to care for their health. When they are ready, the path to ownership is clear — and an 8-week onboarding sequence begins immediately for every new device owner.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE TIERS -->
+<section class="section" id="tiers" style="background:var(--cream);">
+  <div class="section-inner">
+    <div class="label fade">Choose Your Level</div>
+    <h2 class="fade d1" style="color:var(--sage);">Start where you are.<br><em>Grow your business with ease.</em></h2>
+    <p class="lead fade d2">If you have a practice, Gold is where clinicians find their success — at the cost of a single session. Silver is built for very small or emerging practices finding their footing. Bronze gives you the basics to explore.</p>
+    <div class="tier-grid fade d3">
+
+      <!-- BRONZE -->
+      <div class="tier tier-bronze">
+        <div class="tier-badge">Bronze — Explore the Basics</div>
+        <div class="tier-price">Free</div>
+        <div class="tier-per">for 6 months</div>
+        <div class="tier-setup">Then <strong>$36 / month</strong></div>
+        <div class="tier-divider"></div>
+        <h3>The Foundation — Explore Before You Commit</h3>
+        <p class="tier-tagline">New to BEMER and want to explore before committing? This gives you the core education and training tools to get started. The system that drives real results lives in Silver and Gold — but this is a solid first step.</p>
+        <ul class="tier-list">
+          <li>Discover BEMER Education Site — targeted education for patient inquiries, new device owners, and new IBDs</li>
+          <li>BYW Team Landing Page with online consent forms (human &amp; equine)</li>
+          <li>30-day automated patient inquiry education sequences</li>
+          <li>8-week device usage education sequences for new owners and new IBDs</li>
+          <li>Ongoing Monthly Wellness Newsletter</li>
+          <li class="sh">IBD Education &amp; Resource Portal</li>
+          <li>Email reminders of training opportunities and guest invitation calls</li>
+          <li>Tuesday Invite-a-Guest — education &amp; clinical validation calls</li>
+          <li>IBD Deep Dive — clinical research training and ongoing Q &amp; A</li>
+          <li>Recorded IBD Onboarding — how to share BEMER</li>
+          <li>Recorded detailed usage training — EVO (3 distinct trainings), video and written</li>
+          <li>Pro model usage training — 1 video</li>
+          <li>Organizing your BEMER practice — technology support videos</li>
+          <li>Pre-show event tag and a Post-show event list</li>
+        </ul>
+        <a href="https://brightenyourworld.club/marketing" class="btn btn-dark" style="width:100%;color:var(--white);">Start Free</a>
+      </div>
+
+      <!-- SILVER -->
+      <div class="tier tier-silver">
+        <div class="tier-badge">Silver — For the Emerging Practice</div>
+        <div class="tier-price">$63</div>
+        <div class="tier-per">/ month</div>
+        <div class="tier-setup"><strong>$199</strong> one-time setup fee</div>
+        <div class="tier-divider"></div>
+        <h3>Personalized &amp; Moving — Built for a Smaller Practice</h3>
+        <p class="tier-tagline">The right fit for a very small or part-time practice. You get personalized, branded communications and a rental pathway — with a clear path to grow into Gold and the full AI system when you are ready.</p>
+        <ul class="tier-list">
+          <li>Personalized clinical landing page for your chosen patient population — Licensed &amp; Integrative Practitioners, Athletes, Pickleball, or Golf</li>
+          <li>Branded automated email and text sequences sent directly from you — educating and supporting your patients through every stage of their BEMER journey. You will be responsible for going into the back end of the system to respond to texts. In Gold, Flow handles this for you and calls you in when someone is ready for your input.</li>
+          <li>Rental Education Site — patients receive structured education throughout their rental period</li>
+          <li>2-step rental agreement system with automated rental patient follow-up</li>
+          <li class="sh">Bonus Clinical Resources</li>
+          <li>Clinical integration guide — processes &amp; guidelines for using BEMER inside your practice</li>
+          <li>Rental materials and patient support resources</li>
+          <li>Peer-reviewed BEMER research compilations</li>
+          <li>Research-based breakdown of microcirculation and Systems Biology</li>
+          <li>Pre-show event tag and a Post-show event list</li>
+          <li>One-on-one clinical consultation with LoriGrace Kochevar, MS, LPC</li>
+        </ul>
+        <a href="https://brightenyourworld.club/marketing" class="btn" style="width:100%;">Sign Up for Silver</a>
+      </div>
+
+      <!-- GOLD -->
+      <div class="tier tier-gold" style="position:relative;border:3px solid var(--gold);box-shadow:0 12px 48px rgba(201,151,60,.25);">
+        <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--white);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:6px 24px;border-radius:40px;white-space:nowrap;">Most Impactful — Start Here</div>
+        <div class="tier-badge" style="background:var(--gold);color:var(--white);">✦ Recommended for Established Practices</div>
+        <div class="tier-price">$163</div>
+        <div class="tier-per">/ month</div>
+        <div class="tier-setup"><strong>$499</strong> one-time setup fee — includes personalization, CRM onboarding, a personalized AI assistant and training sessions</div>
+        <div class="tier-divider"></div>
+        <h3>If You Have a Practice — This Is What Supports Your Success.</h3>
+        <p class="tier-tagline">At the cost of one session, you gain a full-time AI assistant, the complete Relationship Continuity System, and every tool to grow your IBD income from the practice you have already built. This is the level where clinicians thrive.</p>
+        <ul class="tier-list">
+          <li>Fully customizable personal branded landing page with your own URL, photo, and contact information</li>
+          <li class="sh">Flow — AI Connection Tool</li>
+          <li>An AI-powered assistant that responds to inquiries and supports your outreach — with calendar booking built in. This is like having a full-time employee working for you: answering questions and bringing people to request a phone call so you can support them to get a BEMER for their family. She calls you in when someone is ready for your input.</li>
+          <li class="sh">Full CRM Access</li>
+          <li>System notifications of engaged leads actively opening your education emails</li>
+          <li>Sales pipeline that prioritizes leads by level of engagement</li>
+          <li>Professional email address for your branded sub-domain</li>
+          <li>Specialized campaigns for each audience — leads, device owners, rental patients, and IBDs</li>
+          <li>Voicemail Drop Automation — send a voice message to your entire database in one action</li>
+          <li>Online calendar and patient booking system</li>
+          <li>CRM technical training — Launchpad Mastermind, Fridays 10am MT</li>
+          <li class="sh">All Silver Bonus Resources</li>
+          <li>Clinical integration guide, rental materials, research compilations, and one-on-one consultation</li>
+        </ul>
+        <a href="https://brightenyourworld.club/marketing" class="btn btn-white" style="width:100%;">Sign Up for Gold</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MARKETING MATERIALS ADD-ON -->
+<section class="section addon">
+  <div class="section-inner">
+    <div class="label fade" style="color:var(--sage);">Add-On Package — Available at Any Level</div>
+    <h2 class="fade d1" style="color:var(--sage);">Integrated BEMER<br><em>Marketing Materials</em></h2>
+    <p class="lead fade d2" style="color:var(--muted);">Personalized print and digital materials that connect directly to your Discover BEMER education system — so your practice environment is actively introducing microcirculation optimization to every patient who walks through your door.</p>
+    <div class="addon-grid fade d3">
+      <div class="addon-card">
+        <h4>Lobby Looping Video</h4>
+        <p>Runs continuously in your waiting room — creating curiosity and starting the education process before you enter the room.</p>
+      </div>
+      <div class="addon-card">
+        <h4>2 Laminated Posters</h4>
+        <p>An education poster for your lobby or treatment room and a consent form poster for session intake — personalized to you.</p>
+      </div>
+      <div class="addon-card">
+        <h4>Business Cards</h4>
+        <p>Personalized cards with your QR code — for clinics, events, health fairs, and anywhere patients gather.</p>
+      </div>
+      <div class="addon-card">
+        <h4>Personalized QR Code</h4>
+        <p>Your unique QR code for office and events. One scan takes patients directly into your education journey and automated follow-up system.</p>
+      </div>
+    </div>
+    <div style="margin-top:40px;padding:36px 44px;background:var(--white);border-left:4px solid var(--gold);display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;" class="fade d4">
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--sage);margin-bottom:6px;"><strong>$99</strong> one-time setup fee</p>
+        <p style="font-size:15px;font-weight:300;color:var(--muted);">Plus actual costs of printing and shipping. Works seamlessly with all three Discover BEMER levels.</p>
+      </div>
+      <a href="https://brightenyourworld.club/marketing" class="btn">Order &amp; Customize</a>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="label fade" style="color:var(--sage);">Rest Easy</div>
+    <h2 class="fade d1" style="color:var(--sage);">You can get the answers you need<br><em>at the touch of a button.</em></h2>
+    <p class="lead fade d2" style="color:var(--muted);">You are not doing this alone. The Brighten Your World ecosystem includes weekly live support for you and for your patients — clinical expertise, research, and community, built in at every level.</p>
+    <div class="support-grid fade d3">
+      <div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--sage);margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid rgba(29,82,73,.15);">For You as an IBD</h3>
+        <ul class="support-list">
+          <li>IBD Q&amp;A with LoriGrace &amp; team — 2nd Tuesday monthly</li>
+          <li>Science &amp; Solutions: Microcirculation Research — 4th Thursday</li>
+          <li>IBD Deep Dive — clinical research training and ongoing Q &amp; A</li>
+          <li>Conversations — Regenerative Clinical Network</li>
+          <li>BYW Distributor Training &amp; Library Site — available anytime</li>
+          <li>3 one-on-one recorded CRM training sessions (Silver &amp; Gold)</li>
+          <li>Online / Academy Presentations — via BEMER Corporation</li>
+          <li>One-on-one clinical consultation with LoriGrace Kochevar, MS, LPC</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--sage);margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid rgba(29,82,73,.15);">For Your Patients</h3>
+        <ul class="support-list">
+          <li>BEMER Presentation with medical panel Q&amp;A — 1st &amp; 3rd Tuesdays</li>
+          <li>Science &amp; Solutions microcirculation research session — 4th Thursday</li>
+          <li>Medical Symposium / Wellness Wednesday — hosted by a medical panel</li>
+          <li>Ongoing in-depth usage education — Videos / Long / Short / 3rd Tuesday Evenings</li>
+          <li>Onboarding video series &amp; library for new device owners</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div style="background:var(--sage);padding:100px 80px;text-align:center;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">Ready to Begin</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.2;color:var(--white);margin-bottom:16px;">You have the practice.<br><em>Now build the income to match it.</em></p>
+    <p style="font-size:18px;font-weight:300;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:48px;">The Gold package is built for clinicians who are ready to get the full system, the full support, and the full return — from day one. No starting small. No building toward it later. Start where your practice already is.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://brightenyourworld.club/marketing" class="btn btn-white">Begin Your Practice Accelerator</a>
+      <a href="#tiers" class="btn btn-outline">Review All Three Levels</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Brighten Your <span>World</span></div>
+  <p>brightenyourworld.club/marketing &nbsp;·&nbsp; LoriGrace Kochevar, MS, LPC &nbsp;·&nbsp; 970-352-8873</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
